@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>Patient Form</title>
+    <style>
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        body {
+            background-image: url('PatientInfoBackground.png');
+            background-repeat: no-repeat;
+            background-position: fixed;
+            background-size: 100%;
+        }
+        
+        main {
+            display: block;
+            margin: 20px;
+        }
+        
+        p {
+            color: red;
+        }
+        
+        h1 {
+            color: #51B6B6;
+        }
+        
+        .info {
+            background-color: #C6EFEF;
+            padding: 5px;
+            width: 80%
+        }
+        
+        label {
+            padding-top: 10px;
+        }
+        
+        .reg {
+            padding-left: 100px;
+        }
+        
+        .medical,
+        #symptoms {
+            margin-left: 5px;
+        }
+        
+        .med {
+            padding-left: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>Welcome! </h1>
+        <h3>Patient Form</h3>
+        <form action="">
+            <div class="row">
+                <div class="reg col-6">
+                    <label for="">First Name *</label>
+                    <br><input type="text" class="info" id="firstName" maxlength="20">
+                    <p id="ef"></p>
+                    <label for="">Middle Name</label>
+                    <br><input type="text" class="info" id="middleName">
+                    <p></p>
+                    <label for="">Last Name *</label>
+                    <br><input type="text" class="info" id="lastName" maxlength="20">
+                    <p id="el"></p> <label for="">Address *</label>
+                    <br><input type="text" class="info" id="address">
+                    <p id="ea"></p>
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="">Contact Number*</label>
+                            <br><input type="number" class="info" id="contactNumber" max="18">
+                            <p id="ec"></p>
+                        </div>
+                        <div class="col-4"> <label for="">Birthdate *</label>
+                            <br> <input type="date" class="info" id="birthdate" min="1922-01-01" max="2023-01-01">
+                            <p id="eb"></p>
+                        </div>
+                        <div class="col-4"> <label for="">Gender *</label>
+                            <br><input type="radio" name="gender" id="male" value="Male">Male
+                            <input type="radio" name="gender" id="female" value="Female">Female
+                            <p id="eg"></p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-6">
+                    <div class="row"><br><label for=""><h5>Medical History:</h5> </label>
+                        <div class=" med col-6">
+                            <input type="checkbox" name="medicalHistory" value="Asthma">Asthma
+                            <br><input type="checkbox" name="medicalHistory" value="Cancer">Cancer
+                            <br><input type="checkbox" name="medicalHistory" value="Cardiac Disease">Cardiac Disease
+                            <br><input type="checkbox" name="medicalHistory" value="Diabetes">Diabetes
+                            <br><input type="checkbox" name="medicalHistory" value="Hypertension">Hypertension
+                        </div>
+                        <div class="col-6">
+                            <input type="checkbox" name="medicalHistory" value="Psychiatric Disorder">Psychiatric Disorder
+                            <br><input type="checkbox" name="medicalHistory" value="Epilepsy">Epilepsy
+                            <br><input type="checkbox" id="others" value="Others" onclick="enableDisable(this.checked, 'othertext')">Others.
+                            <br><input type=" text " name="medicalHistory " id="othertext" disabled>
+                        </div>
+                    </div>
+
+                    <br><label for=""> <h5> Current Symptoms: </h5></label>
+                    <select name="symptooms" id="symptoms" multiple>
+                    <option value="Chest Pain">Chest Pain</option>
+                    <option value="Respiratory">Respiratory</option>
+                    <option value="Hematologival">Hematologival</option>
+                    <option value="Lymphatic">Lymphatic</option>
+                    <option value="Neurological">Neurological</option>
+                </select>
+                    <br><label for="">Are you currently taking medication?</label>
+                    <input type="radio" name="medication" class="medical" id="yes" onclick="enableDisablemed()" value="Yes">YES
+                    <input type="radio" name="medication" class="medical" id="no" onclick="enableDisablemed()" value="No">NO
+                    <br><label for="">What medication are you taking?</label>
+                    <input type="text" name="medication" id="medtext" disabled>
+                </div>
+
+                <div style="text-align: center;">
+                    <br> <br><button type="button" onclick="validate()" name="submitBtn" id="submitBtn" style="background-color: #51B6B6 ; color: white; border: none; width: 100px;  height: 40px; border-radius: 10px; "> <h4>SUBMIT </h4> </button>
+
+                </div>
+
+
+            </div>
+        </form>
+
+    </main>
+
+    <script>
+        function validate() {
+            validateGender();
+            validateName();
+        }
+
+        function enableDisable(bEnable, othertext) {
+            document.getElementById('othertext').disabled = !bEnable
+            document.getElementById('othertext').value = ' ';
+        }
+
+        function enableDisablemed() {
+            var ryes = document.getElementById('yes');
+            var medtext = document.getElementById('medtext');
+
+            if (ryes.checked) {
+                medtext.disabled = false;
+            } else {
+                medtext.value = ' ';
+
+                medtext.disabled = true;
+            }
+        }
+
+
+
+        function validateGender() {
+            let gender = document.getElementsByClassName('gender');
+            let slBtn;
+            for (const gen of gender) {
+                if (gen.checked) {
+                    return slBtn = gen.value;
+
+                } else {
+                    document.getElementById('eg').innerHTML = `*Required`;
+                }
+            }
+
+        }
+
+
+        let user = [];
+        const reg = (e) => {
+            e.preventDefault();
+            let gender = document.querySelector('input[name = gender]:checked').value;
+            let register = {
+                firstName: document.getElementById('firstName').value,
+                middleName: document.getElementById('middleName').value,
+                lastName: document.getElementById('lastName').value,
+                address: document.getElementById('address').value,
+                contactNumber: document.getElementById('contactNumber').value,
+                birthdate: document.getElementById('birthdate').value,
+                medtxt: document.getElementById('medtext').value,
+                gender: gender,
+            }
+            user.push(register);
+            localStorage.setItem('RegisteredUser', JSON.stringify(user));
+            medHistory();
+            symptom();
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('submitBtn').addEventListener('click', reg);
+        });
+
+
+        function validateName() {
+            let firstName = document.getElementById('firstName').value;
+            let middleName = document.getElementById('middleName').value;
+            let lastName = document.getElementById('lastName').value;
+            let address = document.getElementById('address').value;
+            let birthdate = document.getElementById('address').value;
+            let contactNumber = document.getElementById('contactNumber').value;
+            if (firstName === '' || lastName === '' || address === '' || contactNumber === '' || birthdate === '') {
+                if (firstName === '') {
+                    document.getElementById('ef').innerHTML = `*Required`;
+                }
+                if (lastName === '') {
+                    document.getElementById('el').innerHTML = `*Required`;
+                }
+                if (address === '') {
+                    document.getElementById('ea').innerHTML = `*Required`;
+                }
+                if (contactNumber === '') {
+                    document.getElementById('ec').innerHTML = `*Required`;
+                }
+                if (birthdate === '') {
+                    document.getElementById('eb').innerHTML = `*Required`;
+                }
+            } else {
+                window.location.href = "patientInformation.html";
+            }
+
+        }
+
+        function medHistory() {
+            medicalHistory = document.querySelectorAll(`input[name="medicalHistory"]:checked`)
+            let mH = []
+
+            for (const mHistory of medicalHistory) {
+                if (mHistory.checked) {
+                    mH.push(' ' + mHistory.value)
+                }
+            }
+
+            mH.push(' ' + document.getElementById('othertext').value);
+
+            localStorage.setItem('Medicalhistory', JSON.stringify(mH))
+
+        }
+
+        function symptom() {
+            let selectedvalue = document.querySelector('#symptoms')
+            let symptoms = [...selectedvalue.options].filter(svalue => svalue.selected).map(selected => selected.value)
+            localStorage.setItem('Medicalsymptoms', JSON.stringify(symptoms))
+        }
+    </script>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+
+</html>

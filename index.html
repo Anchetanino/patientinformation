@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <title>Private Clinic</title>
+    <style>
+        body {
+            background-color: #99D9D9;
+        }
+        
+        p {
+            color: red;
+        }
+        
+        input {
+            background-color: #C6EFEF;
+            border-radius: 25px;
+            border: none;
+            height: 30px;
+        }
+        
+        .button {
+            text-align: center;
+        }
+        
+        main {
+            align-self: center;
+        }
+        
+        h1 {
+            color: white
+        }
+        
+        button {
+            background-color: #51B6B6;
+            color: white;
+            border: none;
+            width: 75px;
+            height: 35px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="row">
+
+        <main class="col-6">
+            <div class="button">
+                <form id="form">
+                    <h1>LOG IN</h1>
+                    <p id="error_up"></p>
+                    <label for="username">Username:</label>
+                    <br><input type="text" id="username">
+                    <br> <br><label for="password">Password</label>
+                    <br><input type="password" id="password">
+                    <p id="error_p"></p>
+                    <br>
+
+                    <button type="button" onclick="validate()" name="submitBtn" id="submitBtn"> SUBMIT</button>
+
+                </form>
+            </div>
+        </main>
+        <div class="col-6">
+            <img src="HomepageImage.jpg" alt="" style="justify-self: end; width: 100%; height: 1fr;">
+
+        </div>
+    </div>
+    <script>
+        function validate() {
+            let userName = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+            let submit = document.querySelector('#submitBtn')
+            let form = document.querySelector('#form')
+
+            if (userName == '' || password == ' ') {
+                document.getElementById('error_up').innerHTML = `*Please insert username or password`;
+            } else if (password == 'password' || password == 'PASSWORD' || password == 'Password') {
+                document.getElementById('error_p').innerHTML = `*Password must not be password`;
+            } else if (password.length <= 8) {
+                document.getElementById('error_p').innerHTML = `*Password must be above 8 characters`;
+            } else if (password == '123456789' || password == '987654321') {
+                document.getElementById('error_p').innerHTML = `*Password must not equal to 123456789`;
+            } else {
+                window.location.href = "patientForm.html"
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+    </div>
+</body>
+
+</html>

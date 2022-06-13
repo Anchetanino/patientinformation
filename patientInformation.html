@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <title>Document</title>
+    <style>
+        .info {
+            background-color: #C6EFEF;
+            padding: 5px;
+            width: 80%
+        }
+        
+        label {
+            padding-top: 10px;
+        }
+    </style>
+
+</head>
+
+<body class="p-5">
+    <div class="row mt-2 ">
+        <div class="col-3">
+            <label for="">First Name:</label>
+        </div>
+        <div class="col-7">
+            <div class="info" id="firstName"></div>
+        </div>
+    </div>
+    <div class="row mt-2  ">
+        <div class="col-3">
+            <label for="">Middle Name:</label>
+        </div>
+        <div class="col-7">
+            <div class="info" id="middleName"></div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-3">
+            <label for="">Last Name:</label>
+        </div>
+        <div class="col-7">
+            <div class="info" id="lastName"></div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-3">
+            <label for="">Address:</label>
+        </div>
+        <div class="col-7">
+            <div class="info" id="address"> </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-3">
+            <label for="">Contact Number:</label>
+        </div>
+        <div class="col-7">
+            <div class="info" id="contactNumber"></div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-3">
+            <label for="">Birthdate:</label>
+        </div>
+        <div class="col-7">
+            <div class="info" id="birthdate"></div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-3">
+            <label for="">Gender:</label>
+        </div>
+        <div class="col-7">
+            <div class="info" id="gender"></div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-3">
+            <label for="">Medical History: </label>
+        </div>
+        <div class="col-7">
+            <div class="info" id="medicalHistory"></div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-3">
+            <label for=""> Current Symptoms: </label>
+        </div>
+        <div class="col-7">
+            <div class="info" id="currentSymptoms"></div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-3">
+            <label for="">Current Medication:</label>
+        </div>
+        <div class="col-7">
+            <div class="info" id="medtext"></div>
+        </div>
+    </div>
+
+    <script>
+        let user = JSON.parse(localStorage.getItem('RegisteredUser'));
+        user.map((list) => {
+            document.getElementById('firstName').innerHTML = list.firstName;
+            document.getElementById('middleName').innerHTML = list.middleName;
+            document.getElementById('lastName').innerHTML = list.lastName;
+            document.getElementById('address').innerHTML = list.address;
+            document.getElementById('contactNumber').innerHTML = list.contactNumber;
+            document.getElementById('birthdate').innerHTML = list.birthdate;
+            document.getElementById('gender').innerHTML = list.gender;
+            document.getElementById('medtext').innerHTML = list.medtxt;
+        })
+        let medHistory = JSON.parse(localStorage.getItem('Medicalhistory'));
+
+        document.getElementById('medicalHistory').innerHTML = medHistory;
+
+        let currentSymptoms = JSON.parse(localStorage.getItem('Medicalsymptoms'));
+        document.getElementById('currentSymptoms').innerHTML = currentSymptoms;
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
